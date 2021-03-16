@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.haivo.editablerecyclerview.MoreAppActivity">
+
+    <TextView
+        android:id="@+id/tv_apps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="16dp"
+        android:text="常用应用"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tv_edit_apps"
+        style="@style/Button.TextButton.Custom.Small"
+        android:layout_marginEnd="8dp"
+        android:text="编辑"
+        android:textColor="#a0a0a0"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_apps"
+        app:layout_constraintBottom_toBottomOf="@id/tv_apps"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_apps"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxHeight="148dp"
+        android:minHeight="74dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        tools:listitem="@layout/item_home_apps"
+        tools:itemCount="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_apps" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="25dp"
+        android:layout_height="1px"
+        android:background="#979797"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintTop_toTopOf="@id/tv_tip"
+        app:layout_constraintEnd_toStartOf="@id/tv_tip"
+        app:layout_constraintBottom_toBottomOf="@id/tv_tip" />
+
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="15dp"
+        android:text="以上应用展示在首页，拖拽可调整顺序"
+        android:textColor="#a0a0a0"
+        android:textSize="9sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_apps"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="25dp"
+        android:layout_height="1px"
+        android:background="#979797"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="@id/tv_tip"
+        app:layout_constraintStart_toEndOf="@id/tv_tip"
+        app:layout_constraintBottom_toBottomOf="@id/tv_tip" />
+
+    <TextView
+        android:id="@+id/tv_all_apps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="15dp"
+        android:text="所有应用"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tip" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_all_apps"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        tools:listitem="@layout/item_home_apps"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_all_apps"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
