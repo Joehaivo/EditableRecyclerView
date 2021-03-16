@@ -1,0 +1,3 @@
+# EditableRecyclerView
+用RecyclerView实现类似支付宝应用图标拖拽排序以及增删管理的功能
+
