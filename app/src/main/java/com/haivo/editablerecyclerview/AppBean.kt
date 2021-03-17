@@ -10,6 +10,7 @@ import com.blankj.utilcode.util.ActivityUtils
  * @description: 应用bean
  **/
 class AppBean() : Parcelable {
+    var subAppBeans: MutableList<AppBean> = mutableListOf()
     var name: String = ""
     var uid: String = ""
     var iconRes: Int = -1

@@ -3,15 +3,18 @@ package com.haivo.editablerecyclerview
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ActivityUtils
+import com.blankj.utilcode.util.CloneUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.haivo.editablerecyclerview.databinding.ActivityMoreAppsBinding
+import com.haivo.editablerecyclerview.helper.ItemTouchHelper
+import java.lang.reflect.Type
 import java.util.*
 
 /**
@@ -147,17 +150,17 @@ class MoreAppActivity : AppCompatActivity() {
                         targetHolder.adapterPosition
                     )
                     // 在每次移动后, 将界面上图标的顺序同步到appsAdapter.data中
-                    val newData = mutableListOf<Pair<String, Int>>()
-                    commonAppsAdapter.data.forEachIndexed { index, _ ->
-                        val holder =
-                            recyclerView.findViewHolderForAdapterPosition(index) as AppsHolder
-                        newData.add(Pair(holder.funcUrl, index))
-                    }
-                    for (i in newData) {
-                        val sameFuncIndex =
-                            commonAppsAdapter.data.indexOfFirst { i.first == it.uid }
-                        Collections.swap(commonAppsAdapter.data, i.second, sameFuncIndex)
-                    }
+//                    val newData = mutableListOf<Pair<String, Int>>()
+//                    commonAppsAdapter.data.forEachIndexed { index, _ ->
+//                        val holder =
+//                            recyclerView.findViewHolderForAdapterPosition(index) as AppsHolder
+//                        newData.add(Pair(holder.funcUrl, index))
+//                    }
+//                    for (i in newData) {
+//                        val sameFuncIndex =
+//                            commonAppsAdapter.data.indexOfFirst { i.first == it.uid }
+//                        Collections.swap(commonAppsAdapter.data, i.second, sameFuncIndex)
+//                    }
                     return true
                 }
 
@@ -170,6 +173,23 @@ class MoreAppActivity : AppCompatActivity() {
                 ) = true
 
                 override fun isLongPressDragEnabled() = false
+
+                override fun onMerge(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ) {
+                    Log.i(TAG, "onMerge: $viewHolder $target")
+                    val removedIndex = viewHolder.adapterPosition
+                    val targetIndex = target.adapterPosition
+                    val targetAppBean = commonAppsAdapter.data[targetIndex]
+                    if (targetAppBean.subAppBeans.size < 3) {
+                        targetAppBean.subAppBeans.add(commonAppsAdapter.data[removedIndex])
+                        targetAppBean.subAppBeans.add(targetAppBean)
+                        commonAppsAdapter.data.removeAt(removedIndex)
+                        commonAppsAdapter.notifyDataSetChanged()
+                    }
+                }
             })
 
             commonAppsAdapter.dragOverListener = object : DragOverListener {
